@@ -7,24 +7,35 @@ const Room = require('../models/Rooms');
 const Players = require('../models/Players');
 const hostServer = process.env.HOSTSERVER;
 
-// const credentials = {
-//   "type": process.env.TYPE,
-//   "project_id": process.env.PROJECT_ID,
-//   "private_key_id": process.env.PRIVATE_KEY_ID,
-//   "private_key": process.env.PRIVATE_KEY,
-//   "client_email": process.env.CLIENT_EMAIL,
-//   "client_id": process.env.CLIENT_ID,
-//   "auth_uri": process.env.AUTH_URI,
-//   "token_uri": process.env.TOKEN_URI,
-//   "auth_provider_x509_cert_url": process.env.AUTH_PROVIDER_X509_CERT_URL,
-//   "client_x509_cert_url": process.env.CLIENT_X509_CERT_URL
-// };
+const credentials = {
+  "type": process.env.TYPE,
+  "project_id": process.env.PROJECT_ID,
+  "private_key_id": process.env.PRIVATE_KEY_ID,
+  "private_key": process.env.PRIVATE_KEY,
+  "client_email": process.env.CLIENT_EMAIL,
+  "client_id": process.env.CLIENT_ID,
+  "auth_uri": process.env.AUTH_URI,
+  "token_uri": process.env.TOKEN_URI,
+  "auth_provider_x509_cert_url": process.env.AUTH_PROVIDER_X509_CERT_URL,
+  "client_x509_cert_url": process.env.CLIENT_X509_CERT_URL
+};
 
-const credentials = process.env.GOOGLE_APPLICATION_CREDENTIALS
+function convertQuotes(credentials) {
+  let newCredentials = {};
+  for (let key in credentials) {
+    if (typeof credentials[key] === 'string') {
+      newCredentials[key] = credentials[key].replace(/'/g, '\"');
+    } else {
+      newCredentials[key] = credentials[key];
+    }
+  }
+  return newCredentials;
+}
 
+const newCredentials = convertQuotes(credentials);
 
 // Create a new ImageAnnotatorClient
-const client = new vision.ImageAnnotatorClient({ credentials });
+const client = new vision.ImageAnnotatorClient({ newCredentials });
 
 
 // Middleware for Google Cloud Vision
@@ -34,24 +45,17 @@ const gvision = async (req, res, next) => {
   }
   try {
     let photo = `${hostServer}/api/media/${req.file.id}`
-    // console.log('This is the Photo', photo);
-    // Download the image and convert it to base64
     const response = await axios.get(photo, { responseType: 'arraybuffer' });
-    // console.log('This is the Response', response, 'End of Response');
     const image = Buffer.from(response.data, 'binary').toString('base64');
-    // console.log('This is the image', image, 'End of image');
-    console.log('This is the Client', client, 'Client Ends Here');
+    // console.log('This is the Client', client, 'Client Ends Here');
     const [result] = await client.labelDetection({
       image: {
         content: image,
       }
     });
-    console.log('This is the result', result, 'result end here');
     const labels = result.labelAnnotations;
-    console.log('This is the Labels', labels, 'Labels end here');
     // Collect labels' descriptions
     const labelsDescription = labels.map(label => label.description);
-    console.log('This is the LabelsDesc', labelsDescription, 'Labelsdesc end here');
 
     // Create new photo document
     const photoDoc = new Photos({
