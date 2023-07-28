@@ -1,6 +1,6 @@
 import decode from 'jwt-decode';
 import Cookies from 'js-cookie';
-const hostServer = 'http://localhost:8080';
+const hostServer = 'https://pure-meadow-61870-2db53a3c769f.herokuapp.com/';
 
 class AuthService {
   getProfile() {

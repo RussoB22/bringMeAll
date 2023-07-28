@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-const hostServer = 'http://localhost:8080';
+const hostServer = 'https://pure-meadow-61870-2db53a3c769f.herokuapp.com/';
 // import AuthServiceInstance from '../utils/auth';
 function ProfilePage({ userId }) {
   const [profileData, setProfileData] = useState(null);
