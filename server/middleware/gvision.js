@@ -1,5 +1,6 @@
 const vision = require('@google-cloud/vision');
 const axios = require('axios');
+require("dotenv").config();
 const Photos = require('../models/Photos');
 const Answers = require('../models/Answers');
 const Room = require('../models/Rooms');
@@ -25,6 +26,8 @@ const credentials = {
 
 // Create a new ImageAnnotatorClient
 const client = new vision.ImageAnnotatorClient({ credentials });
+console.log(credentials);
+console.log(client);
 
 // Middleware for Google Cloud Vision
 const gvision = async (req, res, next) => {
