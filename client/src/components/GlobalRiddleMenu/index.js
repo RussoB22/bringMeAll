@@ -134,7 +134,7 @@ function GlobalRiddleMenu({ onWebcamVisibilityChange, props }) {
     if (!AuthService.loggedIn()) {
       console.log('User not logged in');
       // redirect to signup if not logged in
-      window.location.href = '/signup';
+      window.location.href = `${hostServer}/signup`;
       return;
     }
 

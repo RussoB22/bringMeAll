@@ -20,6 +20,7 @@ router.post("/", updateSessionMiddleware, upload.single("file"), async (req, res
     // Find the user with the id in the decoded token
     const user = await User.findOne({ _id: userId });
 
+
     // If user does not exist, return an error
     if (!user) {
       return res.status(401).json({
