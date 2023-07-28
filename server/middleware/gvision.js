@@ -39,8 +39,8 @@ const gvision = async (req, res, next) => {
     // Download the image and convert it to base64
     const response = await axios.get(photo, { responseType: 'arraybuffer' });
     const image = Buffer.from(response.data).toString('base64');
-    console.log(credentials);
-    console.log(client);
+    console.log('This is the host', hostServer);
+    console.log('This is the Client', client);
     const [result] = await client.labelDetection({
       image: {
         content: image,
@@ -50,7 +50,7 @@ const gvision = async (req, res, next) => {
 
     // Collect labels' descriptions
     const labelsDescription = labels.map(label => label.description);
-    console.log(labelsDescription);
+    console.log('This is the Labels', labelsDescription);
 
     // Create new photo document
     const photoDoc = new Photos({
