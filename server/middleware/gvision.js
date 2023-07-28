@@ -33,6 +33,7 @@ function convertQuotes(credentials) {
 }
 
 const newCredentials = convertQuotes(credentials);
+console.log('Start:', newCredentials, 'end')
 
 // Create a new ImageAnnotatorClient
 const client = new vision.ImageAnnotatorClient({ newCredentials });
