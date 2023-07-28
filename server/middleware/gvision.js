@@ -20,10 +20,6 @@ const credentials = {
   "client_x509_cert_url": process.env.CLIENT_X509_CERT_URL
 };
 
-console.log(process.env.TYPE);
-console.log(process.env.PROJECT_ID);
-console.log(credentials);
-
 // Create a new ImageAnnotatorClient
 const client = new vision.ImageAnnotatorClient({ credentials });
 
