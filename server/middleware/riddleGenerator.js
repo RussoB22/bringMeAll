@@ -135,7 +135,7 @@ const getRiddleForRoom = async (req, res) => {
 
     let newRiddle = null;
     
-    if (Math.random() <= 0.8) {
+    if (Math.random() <= 0.25) {
       const riddlesInDb = await Riddles.find({});
       if (riddlesInDb.length > 0) {
         newRiddle = riddlesInDb[Math.floor(Math.random() * riddlesInDb.length)];
