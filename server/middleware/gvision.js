@@ -38,11 +38,13 @@ const gvision = async (req, res, next) => {
     // const response = await axios.get(photo, { responseType: 'arraybuffer' });
     // const image = Buffer.from(response.data).toString('base64');
 
-    const [result] = await client.labelDetection({
-      image: {
-        content: photo,
-      }
-    });
+    // const [result] = await client.labelDetection({
+    //   image: {
+    //     content: photo,
+    //   }
+    // });
+
+    const [result] = await client.labelDetection(photo);
     const labels = result.labelAnnotations;
 
     // Collect labels' descriptions
