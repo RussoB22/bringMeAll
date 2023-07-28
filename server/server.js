@@ -19,7 +19,7 @@ const path = require('path');
 //   credentials: true
 // }));
 
-app.use(express.static('build'))
+app.use(express.static(path.join(__dirname, 'build')));
 
 app.use(flash());
 
@@ -57,7 +57,7 @@ clearExpiredSessions();
 
 app.use(routes);
 app.get('*', (req, res) => {
-  res.sendFile(path.resolve(__dirname, 'build', 'index.html'));
+  res.sendFile(path.join(__dirname+'/build/index.html'));
 });
 
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
