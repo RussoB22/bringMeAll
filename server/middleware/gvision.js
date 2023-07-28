@@ -21,6 +21,7 @@ const credentials = {
 };
 
 let jsonCredentials = JSON.stringify(credentials);
+console.log(process.env.TYPE);
 console.log(jsonCredentials);
 
 // Create a new ImageAnnotatorClient
