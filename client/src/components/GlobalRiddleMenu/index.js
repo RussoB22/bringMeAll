@@ -2,6 +2,7 @@ import React, { useRef, useState, useEffect } from 'react';
 import Webcam from "react-webcam";
 import './style.css';
 import { TypeAnimation } from 'react-type-animation';
+import { useNavigate } from 'react-router-dom';
 import AuthService from '../../utils/auth';
 import WinVid from '../win/vid';
 import MissVid from '../miss/vid';
@@ -18,6 +19,7 @@ function GlobalRiddleMenu({ onWebcamVisibilityChange, props }) {
   const [roomId, setRoomId] = useState(null);
   const [isAnswerCorrect, setIsAnswerCorrect] = useState(false);
   const [isAnswerIncorrect, setIsAnswerIncorrect] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     // Call the function passed in through the props whenever isWebcamVisible changes
@@ -134,7 +136,7 @@ function GlobalRiddleMenu({ onWebcamVisibilityChange, props }) {
     if (!AuthService.loggedIn()) {
       console.log('User not logged in');
       // redirect to signup if not logged in
-      window.location.href = `${hostServer}/signup`;
+      navigate('/signup');
       return;
     }
 
