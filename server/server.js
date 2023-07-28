@@ -12,11 +12,14 @@ const db = require('./config/connection');
 const { startGlobalRoom } = require('./utils/globalRoomStart');
 app.use(cookieParser());
 
-const cors = require('cors')
-app.use(cors({
-  origin: `${process.env.ORIGINSITE}`,
-  credentials: true
-}));
+// const cors = require('cors')
+// app.use(cors({
+//   origin: `${process.env.ORIGINSITE}`,
+//   credentials: true
+// }));
+
+app.use(express.static('build'))
+
 app.use(flash());
 
 // app.use('/google-cloud', googleCloudMiddleware);
