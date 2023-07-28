@@ -1,5 +1,6 @@
 import decode from 'jwt-decode';
 import Cookies from 'js-cookie';
+const hostServer = 'http://localhost:8080';
 
 class AuthService {
   getProfile() {
@@ -44,7 +45,7 @@ class AuthService {
   // }
   
   async login(credentials) {
-    const response = await fetch('http://localhost:8080/api/auth/login', {
+    const response = await fetch(`${hostServer}/api/auth/login`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -68,7 +69,7 @@ class AuthService {
 
   loginStep2(twofaToken) {
     const loginStep2VerificationToken = this.getLoginStep2VerificationToken();
-    fetch('http://localhost:8080/api/auth/loginStep2', {
+    fetch(`${hostServer}/api/auth/loginStep2`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

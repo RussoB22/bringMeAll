@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+const hostServer = 'http://localhost:8080';
 
 function Leaderboard(props) {
   const [globalData, setGlobalData] = useState([]);
@@ -9,7 +10,7 @@ function Leaderboard(props) {
 
   const fetchGlobalData = async () => {
     try {
-      const response = await fetch('/api/users');
+      const response = await fetch(`${hostServer}/api/users`);
       const data = await response.json();
 
       // Sort the data in descending order based on totalScore

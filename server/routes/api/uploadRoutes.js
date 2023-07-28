@@ -6,7 +6,7 @@ const express = require('express');
 const router = express.Router();
 const User = require('../../models/User');
 const Player = require('../../models/Players');
-
+const hostServer = process.env.HOSTSERVER;
 
 
 router.post("/", updateSessionMiddleware, upload.single("file"), async (req, res, next) => {
@@ -52,7 +52,7 @@ router.post("/", updateSessionMiddleware, upload.single("file"), async (req, res
   }
 }, gvision, async (req, res) => {
   try {
-    const imgUrl = `http://localhost:8080/api/media/${req.file.id}`;
+    const imgUrl = `${hostServer}/api/media/${req.file.id}`;
     console.log(`Uploaded to:${imgUrl}`);
     
     return res.json({

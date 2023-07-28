@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 // import AuthService from '../utils/auth';
+const hostServer = 'http://localhost:8080';
 
 function Signup(props) {
   const [formState, setFormState] = useState({
@@ -37,7 +38,7 @@ function Signup(props) {
   const signupAPI = async (formData) => {
 
     // Perform your API call here and return the response
-    const response = await fetch(`http://localhost:8080/api/users`, {
+    const response = await fetch(`${hostServer}/api/users`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

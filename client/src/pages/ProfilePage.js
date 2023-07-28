@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
-
+const hostServer = 'http://localhost:8080';
 // import AuthServiceInstance from '../utils/auth';
 function ProfilePage({ userId }) {
   const [profileData, setProfileData] = useState(null);
 
   const fetchProfileData = async () => {
     try {
-      const response = await fetch(`http://localhost:8080/api/users/${userId}`, {
+      const response = await fetch(`${hostServer}/api/users/${userId}`, {
         method: 'GET',
         credentials: 'include',
       });
@@ -25,7 +25,7 @@ function ProfilePage({ userId }) {
 
   const deletePhoto = async (photoId) => {
     try {
-      const response = await fetch(`http://localhost:8080/api/media/${photoId}`, {
+      const response = await fetch(`${hostServer}/api/media/${photoId}`, {
         method: 'DELETE',
       });
 
@@ -76,7 +76,7 @@ function ProfilePage({ userId }) {
           {profileData.photos && profileData.photos.map(photoId => (
             <img
               key={photoId}
-              src={`http://localhost:8080/api/media/${photoId}`}
+              src={`${hostServer}/api/media/${photoId}`}
               alt="user photo"
               style={{ width: '200px' }}
               onClick={() => deletePhoto(photoId)}

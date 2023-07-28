@@ -4,6 +4,7 @@ const Photos = require('../models/Photos');
 const Answers = require('../models/Answers');
 const Room = require('../models/Rooms');
 const Players = require('../models/Players');
+const hostServer = process.env.HOSTSERVER;
 
 const credentials = {
   "type": process.env.TYPE,
@@ -31,7 +32,7 @@ const gvision = async (req, res, next) => {
     return next();
   }
   try {
-    let photo = `http://localhost:8080/api/media/${req.file.id}`
+    let photo = `${hostServer}/api/media/${req.file.id}`
 
     // Download the image and convert it to base64
     const response = await axios.get(photo, { responseType: 'arraybuffer' });
