@@ -133,7 +133,18 @@ const getRiddleForRoom = async (req, res) => {
       return res.status(404).json({ message: 'No room with that ID' });
     }
 
-    const newRiddle = await generateRiddle();
+    let newRiddle = null;
+    
+    if (Math.random() <= 0.8) {
+      const riddlesInDb = await Riddles.find({});
+      if (riddlesInDb.length > 0) {
+        newRiddle = riddlesInDb[Math.floor(Math.random() * riddlesInDb.length)];
+      }
+    }
+
+    if (!newRiddle) {
+      newRiddle = await generateRiddle();
+    }
 
     if (newRiddle) {
       room.currentRiddle = newRiddle.riddle;
