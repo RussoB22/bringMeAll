@@ -26,8 +26,7 @@ const credentials = {
 
 // Create a new ImageAnnotatorClient
 const client = new vision.ImageAnnotatorClient({ credentials });
-console.log(credentials);
-console.log(client);
+
 
 // Middleware for Google Cloud Vision
 const gvision = async (req, res, next) => {
@@ -40,7 +39,8 @@ const gvision = async (req, res, next) => {
     // Download the image and convert it to base64
     const response = await axios.get(photo, { responseType: 'arraybuffer' });
     const image = Buffer.from(response.data).toString('base64');
-
+    console.log(credentials);
+    console.log(client);
     const [result] = await client.labelDetection({
       image: {
         content: image,
