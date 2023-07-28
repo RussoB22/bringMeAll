@@ -7,21 +7,20 @@ const Room = require('../models/Rooms');
 const Players = require('../models/Players');
 const hostServer = process.env.HOSTSERVER;
 
-const credentials = {
-  "type": process.env.TYPE,
-  "project_id": process.env.PROJECT_ID,
-  "private_key_id": process.env.PRIVATE_KEY_ID,
-  "private_key": process.env.PRIVATE_KEY,
-  "client_email": process.env.CLIENT_EMAIL,
-  "client_id": process.env.CLIENT_ID,
-  "auth_uri": process.env.AUTH_URI,
-  "token_uri": process.env.TOKEN_URI,
-  "auth_provider_x509_cert_url": process.env.AUTH_PROVIDER_X509_CERT_URL,
-  "client_x509_cert_url": process.env.CLIENT_X509_CERT_URL
-};
+// const credentials = {
+//   "type": process.env.TYPE,
+//   "project_id": process.env.PROJECT_ID,
+//   "private_key_id": process.env.PRIVATE_KEY_ID,
+//   "private_key": process.env.PRIVATE_KEY,
+//   "client_email": process.env.CLIENT_EMAIL,
+//   "client_id": process.env.CLIENT_ID,
+//   "auth_uri": process.env.AUTH_URI,
+//   "token_uri": process.env.TOKEN_URI,
+//   "auth_provider_x509_cert_url": process.env.AUTH_PROVIDER_X509_CERT_URL,
+//   "client_x509_cert_url": process.env.CLIENT_X509_CERT_URL
+// };
 
-
-
+const credentials = process.env.CREDENTIALS
 
 
 // Create a new ImageAnnotatorClient
@@ -35,13 +34,13 @@ const gvision = async (req, res, next) => {
   }
   try {
     let photo = `${hostServer}/api/media/${req.file.id}`
-    console.log('This is the Photo', photo);
+    // console.log('This is the Photo', photo);
     // Download the image and convert it to base64
     const response = await axios.get(photo, { responseType: 'arraybuffer' });
-    console.log('This is the Response', response, 'End of Response');
+    // console.log('This is the Response', response, 'End of Response');
     const image = Buffer.from(response.data, 'binary').toString('base64');
-    console.log('This is the image', image, 'End of image');
-    // console.log('This is the Client', client, 'Client Ends Here');
+    // console.log('This is the image', image, 'End of image');
+    console.log('This is the Client', client, 'Client Ends Here');
     const [result] = await client.labelDetection({
       image: {
         content: image,
