@@ -189,7 +189,6 @@ function GlobalRiddleMenu({ onWebcamVisibilityChange, props }) {
   const handleLeaveRoom = async () => {
     if (!AuthService.loggedIn() || !roomId) {
       console.log('User not logged in or not in room');
-      console.log(roomId);
       return;
     }
 
@@ -203,8 +202,6 @@ function GlobalRiddleMenu({ onWebcamVisibilityChange, props }) {
         throw new Error('Failed to leave the room');
       }
 
-      const leaveData = await leaveRes.json();
-      console.log('Left room:', leaveData);
       setRoomId(null);
       setIsWebcamVisible(false);
 
