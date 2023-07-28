@@ -37,6 +37,7 @@ console.log('Start:', newCredentials, 'end')
 
 // Create a new ImageAnnotatorClient
 const client = new vision.ImageAnnotatorClient({ newCredentials });
+console.log('Start2:', newCredentials2, 'end2')
 
 
 // Middleware for Google Cloud Vision
