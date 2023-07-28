@@ -20,24 +20,9 @@ const credentials = {
   "client_x509_cert_url": process.env.CLIENT_X509_CERT_URL
 };
 
-function convertQuotes(credentials) {
-  let newCredentials = {};
-  for (let key in credentials) {
-    if (typeof credentials[key] === 'string') {
-      newCredentials[key] = credentials[key].replace(/\\n/g, '\n').replace(/'/g, '\"');
-    } else {
-      newCredentials[key] = credentials[key];
-    }
-  }
-  return newCredentials;
-}
-
-const newCredentials = convertQuotes(credentials);
-console.log('Start:', newCredentials, 'end');
-
 // Create a new ImageAnnotatorClient
-const client = new vision.ImageAnnotatorClient({ newCredentials });
-console.log('Start2:', newCredentials, 'end2');
+const client = new vision.ImageAnnotatorClient({ credentials });
+console.log('Start2:', credentials, 'end2');
 
 
 // Middleware for Google Cloud Vision
