@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-// import AuthService from '../utils/auth';
+import AuthService from '../utils/auth';
 const hostServer = 'https://pure-meadow-61870-2db53a3c769f.herokuapp.com';
 
 function Signup(props) {
@@ -21,6 +21,17 @@ function Signup(props) {
     }
     try {
       const response = await signupAPI(formState);
+      if(response.error) {
+        setError(response.error);
+        return;
+      }
+  
+      // Login the user after successful sign up
+      const loginResponse = await AuthService.login({
+        email: formState.email,
+        password: formState.password
+      });
+      localStorage.setItem('userId', loginResponse.userId);
       window.location = '/';
     } catch (error) {
       console.log(error);
