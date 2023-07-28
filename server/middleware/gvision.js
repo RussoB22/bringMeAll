@@ -20,12 +20,12 @@ const credentials = {
   "client_x509_cert_url": process.env.CLIENT_X509_CERT_URL
 };
 
-let jsonCredentials = JSON.stringify(credentials);
 console.log(process.env.TYPE);
-console.log(jsonCredentials);
+console.log(process.env.PROJECT_ID);
+console.log(credentials);
 
 // Create a new ImageAnnotatorClient
-const client = new vision.ImageAnnotatorClient({ jsonCredentials });
+const client = new vision.ImageAnnotatorClient({ credentials });
 
 
 // Middleware for Google Cloud Vision
