@@ -6,7 +6,7 @@ const Answers = require('../models/Answers');
 const Room = require('../models/Rooms');
 const Players = require('../models/Players');
 const hostServer = process.env.HOSTSERVER;
-const vision = require('@google-cloud/vision');
+
 const credentials = {
   "type": process.env.TYPE,
   "project_id": process.env.PROJECT_ID,
