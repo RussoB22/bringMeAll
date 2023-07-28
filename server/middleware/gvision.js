@@ -44,7 +44,13 @@ const gvision = async (req, res, next) => {
     //   }
     // });
 
-    const [result] = await client.labelDetection(photo);
+    const [result] = await client.labelDetection({
+      image: {
+          source: {
+              imageUri: photo
+          }
+      }
+  });
     const labels = result.labelAnnotations;
 
     // Collect labels' descriptions
