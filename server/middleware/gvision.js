@@ -20,7 +20,7 @@ const hostServer = process.env.HOSTSERVER;
 //   "client_x509_cert_url": process.env.CLIENT_X509_CERT_URL
 // };
 
-const credentials = process.env.CREDENTIALS
+const credentials = process.env.GOOGLE_APPLICATION_CREDENTIALS
 
 
 // Create a new ImageAnnotatorClient
