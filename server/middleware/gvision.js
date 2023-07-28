@@ -24,7 +24,7 @@ function convertQuotes(credentials) {
   let newCredentials = {};
   for (let key in credentials) {
     if (typeof credentials[key] === 'string') {
-      newCredentials[key] = credentials[key].replace(/'/g, '\"');
+      newCredentials[key] = credentials[key].replace(/\\n/g, '\n').replace(/'/g, '\"');
     } else {
       newCredentials[key] = credentials[key];
     }
