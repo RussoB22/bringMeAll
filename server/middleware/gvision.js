@@ -39,7 +39,7 @@ const gvision = async (req, res, next) => {
     // Download the image and convert it to base64
     const response = await axios.get(photo, { responseType: 'arraybuffer' });
     console.log('This is the Response', response, 'End of Response');
-    const image = Buffer.from(response.data).toString('base64');
+    const image = Buffer.from(response.data, 'binary').toString('base64');
     console.log('This is the image', image, 'End of image');
     // console.log('This is the Client', client, 'Client Ends Here');
     const [result] = await client.labelDetection({
