@@ -11,6 +11,7 @@ const app = express();
 const db = require('./config/connection');
 const { startGlobalRoom } = require('./utils/globalRoomStart');
 app.use(cookieParser());
+const path = require('path');
 
 // const cors = require('cors')
 // app.use(cors({
@@ -55,6 +56,9 @@ const { clearExpiredSessions } = require('./utils/clearExpiresSessions');
 clearExpiredSessions();
 
 app.use(routes);
+app.get('*', (req, res) => {
+  res.sendFile(path.resolve(__dirname, 'build', 'index.html'));
+});
 
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 db.once('open', () => {
