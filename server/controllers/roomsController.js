@@ -120,7 +120,19 @@ module.exports = {
 
   async joinRoom(req, res) {
     const token = req.cookies.token;
-    const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
+
+    if (!token) {
+        return res.status(401).json({ error: "JWT must be provided" });
+    }
+    
+    let decodedToken;
+    
+    try {
+        decodedToken = jwt.verify(token, process.env.JWT_SECRET);
+    } catch (err) {
+        return res.status(401).json({ error: "Invalid token" });
+    }
+    
     const username = decodedToken.user.username;
     const userId = decodedToken.user._id;
     const roomId = req.params.roomId;
