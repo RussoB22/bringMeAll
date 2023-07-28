@@ -1,0 +1,86 @@
+require('dotenv').config();
+const { Configuration, OpenAIApi } = require("openai");
+const Answers = require('../models/Answers');
+const Riddles = require('../models/Riddles');
+
+// // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// const mongoose = require('mongoose');
+// mongoose.connect(process.env.DB, { useNewUrlParser: true, useUnifiedTopology: true })
+//   .then(() => console.log('Connected to MongoDB'))
+//   .catch(err => console.error('Could not connect to MongoDB...', err));
+// // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+const configuration = new Configuration({
+  apiKey: process.env.CHATGPT_KEY,
+});
+const openai = new OpenAIApi(configuration);
+
+const occupations = [
+  "doctor", "engineer", "teacher", "lawyer", "pilot", "actor",
+  "chef", "developer", "scientist", "nurse", "architect", "plumber",
+  "electrician", "mechanic", "journalist", "photographer", "designer",
+  "painter", "writer", "filmmaker", "detective", "psychologist",
+  "sociologist", "musician", "astronaut", "firefighter", "paramedic",
+  "biologist", "chemist", "physicist", "anthropologist", "ecologist",
+  "veterinarian", "farmer", "horticulturist", "meteorologist", "geologist",
+  "arborist", "zoologist", "philosopher", "linguist", "historian",
+  "statistician", "economist", "geographer", "librarian", "nutritionist",
+  "dietitian", "blacksmith", "carpenter", "stonemason", "glassblower"
+];
+
+const ageGroups = [
+  "infant", "toddler", "child", "pre-teen", "teenager",
+  "young adult", "adult", "middle-aged adult", "senior", "elderly"
+];
+
+
+const getRandomAnswer = async () => {
+  const randomAnswerDoc = await Answers.aggregate([{ $sample: { size: 1 } }]);
+  if (randomAnswerDoc.length > 0) {
+    // Assuming the 'answers' field is an array of answers
+    const randomAnswer = randomAnswerDoc[0].answers[Math.floor(Math.random() * randomAnswerDoc[0].answers.length)];
+    return randomAnswer;
+  } else {
+    console.log('No answers found in the database.');
+    return null;
+  }
+}
+
+
+const generateRiddle = async (roomId) => {
+  const occupation = occupations[Math.floor(Math.random() * occupations.length)];
+  // const roomType = roomTypes[Math.floor(Math.random() * roomTypes.length)];
+  const ageGroup = ageGroups[Math.floor(Math.random() * ageGroups.length)];
+  // const leisurePlace = leisurePlaces[Math.floor(Math.random() * leisurePlaces.length)];
+  const answer = await getRandomAnswer();
+  try {
+    const completion = await openai.createChatCompletion({
+      model: "gpt-3.5-turbo-0613",
+      messages: [
+        { role: 'system', content: `You will pretend to be a ${ageGroup} ${occupation}.` },
+        { role: 'user', content: `Tell me riddle where the answer is ${answer}.` },
+        { role: 'assistant', content: `ChatGPT will responds with a riddle without saying ${answer}` }
+      ]
+    });
+    console.log(ageGroup, occupation, answer);
+    console.log(completion.data.choices[0].message.content);
+    // Create new riddle document
+    const riddleText = completion.data.choices[0].message.content;
+    const newRiddle = new Riddles({ riddle: riddleText, answer: answer });
+    await newRiddle.save();
+
+    console.log('New riddle saved to the database.');
+    return newRiddle;
+  } catch (error) {
+    console.error('An error occurred: ', error);
+    return null;
+  }
+}
+
+// const startGeneratingRiddles = () => {
+//   generateRiddle();
+//   setInterval(generateRiddle, 1 * 20 * 1000);
+// }
+
+// startGeneratingRiddles();
