@@ -33,11 +33,11 @@ function convertQuotes(credentials) {
 }
 
 const newCredentials = convertQuotes(credentials);
-console.log('Start:', newCredentials, 'end')
+console.log('Start:', newCredentials, 'end');
 
 // Create a new ImageAnnotatorClient
 const client = new vision.ImageAnnotatorClient({ newCredentials });
-console.log('Start2:', newCredentials2, 'end2')
+console.log('Start2:', newCredentials, 'end2');
 
 
 // Middleware for Google Cloud Vision
