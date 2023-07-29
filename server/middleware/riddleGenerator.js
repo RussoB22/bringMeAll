@@ -131,7 +131,7 @@ const generateRiddle = async () => {
   const answer = await getRandomAnswer();
   try {
     const completion = await openai.createChatCompletion({
-      model: "gpt-4",
+      model: "gpt-3.5-turbo-0613",
       messages: [
         { role: 'system', content: `ChatGPT will pretend to be a ${ageGroup} ${animeCharacter}.` },
         { role: 'user', content: `Tell me riddle where the answer is ${answer}.` },
