@@ -15,8 +15,11 @@ const memeLanguages = [
   "nom", "fleek", "teh", "pwned", "bae",
   "lit", "fam", "savage", "stan", "squad",
   "swag", "yolo", "noob", "gg", "ree",
-  "bruh", "yeet", "mood", "af", "troll"
+  "bruh", "yeet", "mood", "af", "troll",
+  "lol", "rofl", "meme", "ship", "hype",
+  "dank", "cursed", "wholesome", "cringe", "thicc"
 ]
+
 
 const weirdPersonas = [
   "obsessive significant other",
@@ -78,6 +81,48 @@ const weirdPersonas = [
   "chronically bored immortal"
 ]
 
+const animeCharacters = [
+  "Light Yagami (Death Note)",
+  "L (Death Note)",
+  "Edward Elric (Fullmetal Alchemist: Brotherhood)",
+  "Alphonse Elric (Fullmetal Alchemist: Brotherhood)",
+  "Spike Spiegel (Cowboy Bebop)",
+  "Goku (Dragon Ball Z)",
+  "Vegeta (Dragon Ball Z)",
+  "Naruto Uzumaki (Naruto)",
+  "Sasuke Uchiha (Naruto)",
+  "Luffy (One Piece)",
+  "Sanji (One Piece)",
+  "Mikasa Ackerman (Attack on Titan)",
+  "Eren Yeager (Attack on Titan)",
+  "Asuka Langley Soryu (Neon Genesis Evangelion)",
+  "Shinji Ikari (Neon Genesis Evangelion)",
+  "Vash the Stampede (Trigun)",
+  "Rintarou Okabe (Steins;Gate)",
+  "Homura Akemi (Madoka Magica)",
+  "Ichigo Kurosaki (Bleach)",
+  "Levi Ackerman (Attack on Titan)",
+  "Monkey D. Luffy (One Piece)",
+  "Tony Tony Chopper (One Piece)",
+  "Roronoa Zoro (One Piece)",
+  "Totoro (My Neighbor Totoro)",
+  "Kusuo Saiki (The Disastrous Life of Saiki K.)",
+  "Saitama (One Punch Man)",
+  "Inuyasha (Inuyasha)",
+  "Kagome Higurashi (Inuyasha)",
+  "Rukia Kuchiki (Bleach)",
+  "Orihime Inoue (Bleach)",
+  "Yoruichi Shihoin (Bleach)",
+  "Uryū Ishida (Bleach)",
+  "Rikka Takanashi (Chuunibyo & Other Delusions)",
+  "Yūta Togashi (Chuunibyo & Other Delusions)",
+  "Sanae Dekomori (Chuunibyo & Other Delusions)",
+  "Gintoki Sakata (Gintama)",
+  "Shinpachi Shimura (Gintama)",
+  "Kagura (Gintama)",
+  "Toshiro Hijikata (Gintama)"
+]
+
 
 
 const getRandomAnswer = async () => {
@@ -105,9 +150,9 @@ const generateRiddle = async () => {
     const completion = await openai.createChatCompletion({
       model: "gpt-3.5-turbo-0613",
       messages: [
-        { role: 'system', content: `ChatGPT will pretend to be a ${ageGroup} ${weirdPersona}.` },
+        { role: 'system', content: `ChatGPT will pretend to be a ${ageGroup} ${animeCharacters}.` },
         { role: 'user', content: `Tell me riddle where the answer is ${answer}.` },
-        { role: 'assistant', content: `ChatGPT will speak in ${memeLanguage} and respond with a riddle without saying ${answer}` }
+        { role: 'assistant', content: `ChatGPT will say the riddle in ${memeLanguage} without saying ${answer}` }
       ]
     })
     ;
