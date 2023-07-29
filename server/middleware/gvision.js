@@ -38,7 +38,7 @@ const gvision = async (req, res, next) => {
       image: {
         content: image,
       },
-      limit: 50,
+      limit: 25,
     });
     const labels = result.labelAnnotations;
     // Collect labels' descriptions
