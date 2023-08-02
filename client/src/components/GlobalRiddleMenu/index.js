@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import AuthService from '../../utils/auth';
 import WinVid from '../win/vid';
 import MissVid from '../miss/vid';
-const hostServer = 'https://pure-meadow-61870-2db53a3c769f.herokuapp.com';
+const hostServer = 'https://bringmeall-820d703952e6.herokuapp.com/';
 
 
 function GlobalRiddleMenu({ onWebcamVisibilityChange, props }) {
