@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
-const hostServer = 'https://bringmeall-820d703952e6.herokuapp.com/';
+const hostServer = 'https://bringmeall-820d703952e6.herokuapp.com';
 
 function ProfilePage() {
   const [profileData, setProfileData] = useState(null);

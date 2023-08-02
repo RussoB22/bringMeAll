@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import AuthService from '../utils/auth';
-const hostServer = 'https://bringmeall-820d703952e6.herokuapp.com/';
+const hostServer = 'https://bringmeall-820d703952e6.herokuapp.com';
 
 function Signup(props) {
   const [formState, setFormState] = useState({

@@ -1,6 +1,6 @@
 import decode from 'jwt-decode';
 import Cookies from 'js-cookie';
-const hostServer = 'https://bringmeall-820d703952e6.herokuapp.com/';
+const hostServer = 'https://bringmeall-820d703952e6.herokuapp.com';
 
 class AuthService {
   getProfile() {

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-const hostServer = 'https://bringmeall-820d703952e6.herokuapp.com/';
+const hostServer = 'https://bringmeall-820d703952e6.herokuapp.com';
 
 function Leaderboard(props) {
   const [globalData, setGlobalData] = useState([]);
