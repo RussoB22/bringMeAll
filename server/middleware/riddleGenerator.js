@@ -15,67 +15,94 @@ const memeLanguages = [
   "nom", "fleek", "teh", "pwned", "bae",
   "lit", "fam", "savage", "stan", "squad",
   "swag", "yolo", "noob", "gg", "ree",
-  "bruh", "yeet", "mood", "af", "troll"
+  "bruh", "yeet", "mood", "af", "troll",
+  "lol", "rofl", "meme", "ship", "hype",
+  "dank", "cursed", "wholesome", "cringe", "thicc"
 ]
 
+
 const weirdPersonas = [
-  "obsessive significant other",
-  "alien disguised as human",
-  "time-traveling historian",
-  "overly enthusiastic life coach",
-  "paranoid conspiracy theorist",
-  "amateur ghost hunter",
-  "self-proclaimed vampire",
-  "larping medieval knight",
-  "obsessed celebrity fan",
-  "delusional self-help guru",
-  "wannabe superhero",
-  "unemployed philosophy major",
-  "overzealous PTA mom",
-  "internet troll",
-  "recluse billionaire",
-  "compulsive liar",
-  "obsessive doll collector",
-  "struggling artist",
-  "stressed out yoga teacher",
-  "overly competitive gamer",
-  "narcissistic social media influencer",
-  "aspiring martian colonist",
-  "convinced they're a werewolf",
-  "reality show has-been",
-  "eccentric pet whisperer",
-  "retired superhero",
-  "grumpy lighthouse keeper",
-  "overconfident amateur chef",
-  "mysterious treasure hunter",
-  "washed-up child star",
-  "secret double agent",
-  "zombie apocalypse prepper",
-  "novice witch",
-  "overachieving scoutmaster",
-  "disgruntled office worker",
-  "frustrated mime",
-  "pessimistic weather forecaster",
-  "overworked elf",
-  "self-absorbed rock star",
-  "alien conspiracy theorist",
-  "nervous stand-up comedian",
-  "ambitious yet clueless inventor",
-  "reckless test pilot",
-  "clumsy acrobat",
-  "overzealous fortune teller",
-  "anxious astronaut",
-  "daydreaming librarian",
-  "overbearing food critic",
-  "hopeless romantic",
-  "underappreciated superhero sidekick",
-  "extreme sports junkie",
-  "adventurous archaeologist",
-  "rookie pirate",
-  "awkward ventriloquist",
-  "perpetually lost explorer",
-  "talking animal",
-  "chronically bored immortal"
+  "Yandere",
+  "Kuudere",
+  "Tsundere",
+  "Dandere",
+  "Himedere",
+  "Deredere",
+  "Tsunshun",
+  "Kamidere",
+  "Yangire",
+  "Utsudere",
+  "Bodere",
+  "Hinedere",
+  "Nekodere",
+  "Shundere",
+  "Sadodere",
+  "Mayadere",
+  "Coodere",
+  "Genki Girl",
+  "Chuunibyou",
+  "Bishounen",
+  "Bishoujo",
+  "Moe",
+  "Tomboy",
+  "Ojou-sama",
+  "Megane",
+  "Chibi",
+  "Dojikko",
+  "Kuromimi",
+  "Shota",
+  "Loli",
+  "Otokonoko",
+  "Gyaru",
+  "Mahou Shoujo",
+  "Ninja",
+  "Senpai",
+  "Kouhai",
+  "Sensei",
+  "Ijimekko",
+  "Tsukkomi and Boke (Manzai duo)"
+]
+
+const animeCharacters = [
+  "Light Yagami (Death Note)",
+  "L (Death Note)",
+  "Edward Elric (Fullmetal Alchemist: Brotherhood)",
+  "Alphonse Elric (Fullmetal Alchemist: Brotherhood)",
+  "Spike Spiegel (Cowboy Bebop)",
+  "Goku (Dragon Ball Z)",
+  "Vegeta (Dragon Ball Z)",
+  "Naruto Uzumaki (Naruto)",
+  "Sasuke Uchiha (Naruto)",
+  "Luffy (One Piece)",
+  "Sanji (One Piece)",
+  "Mikasa Ackerman (Attack on Titan)",
+  "Eren Yeager (Attack on Titan)",
+  "Asuka Langley Soryu (Neon Genesis Evangelion)",
+  "Shinji Ikari (Neon Genesis Evangelion)",
+  "Vash the Stampede (Trigun)",
+  "Rintarou Okabe (Steins;Gate)",
+  "Homura Akemi (Madoka Magica)",
+  "Ichigo Kurosaki (Bleach)",
+  "Levi Ackerman (Attack on Titan)",
+  "Monkey D. Luffy (One Piece)",
+  "Tony Tony Chopper (One Piece)",
+  "Roronoa Zoro (One Piece)",
+  "Totoro (My Neighbor Totoro)",
+  "Kusuo Saiki (The Disastrous Life of Saiki K.)",
+  "Saitama (One Punch Man)",
+  "Inuyasha (Inuyasha)",
+  "Kagome Higurashi (Inuyasha)",
+  "Rukia Kuchiki (Bleach)",
+  "Orihime Inoue (Bleach)",
+  "Yoruichi Shihoin (Bleach)",
+  "Uryū Ishida (Bleach)",
+  "Rikka Takanashi (Chuunibyo & Other Delusions)",
+  "Yūta Togashi (Chuunibyo & Other Delusions)",
+  "Sanae Dekomori (Chuunibyo & Other Delusions)",
+  "Gintoki Sakata (Gintama)",
+  "Shinpachi Shimura (Gintama)",
+  "Kagura (Gintama)",
+  "Toshiro Hijikata (Gintama)"
 ]
 
 
@@ -100,14 +127,15 @@ const generateRiddle = async () => {
   const memeLanguage = memeLanguages[Math.floor(Math.random() * memeLanguages.length)];
   const ageGroup = ageGroups[Math.floor(Math.random() * ageGroups.length)];
   const weirdPersona = weirdPersonas[Math.floor(Math.random() * weirdPersonas.length)];
+  const animeCharacter = animeCharacters[Math.floor(Math.random() * animeCharacters.length)];
   const answer = await getRandomAnswer();
   try {
     const completion = await openai.createChatCompletion({
       model: "gpt-3.5-turbo-0613",
       messages: [
-        { role: 'system', content: `ChatGPT will pretend to be a ${ageGroup} ${weirdPersona}.` },
+        { role: 'system', content: `ChatGPT will pretend to be a ${ageGroup} ${animeCharacter}.` },
         { role: 'user', content: `Tell me riddle where the answer is ${answer}.` },
-        { role: 'assistant', content: `ChatGPT will speak in ${memeLanguage} and respond with a riddle without saying ${answer}` }
+        { role: 'assistant', content: `ChatGPT will say the riddle in ${memeLanguage} ${weirdPersona} without saying ${answer}` }
       ]
     })
     ;
@@ -135,7 +163,7 @@ const getRiddleForRoom = async (req, res) => {
 
     let newRiddle = null;
     
-    if (Math.random() <= 0.8) {
+    if (Math.random() <= 0.85) {
       const riddlesInDb = await Riddles.find({});
       if (riddlesInDb.length > 0) {
         newRiddle = riddlesInDb[Math.floor(Math.random() * riddlesInDb.length)];

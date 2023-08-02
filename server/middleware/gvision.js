@@ -37,7 +37,8 @@ const gvision = async (req, res, next) => {
     const [result] = await client.labelDetection({
       image: {
         content: image,
-      }
+      },
+      limit: 25,
     });
     const labels = result.labelAnnotations;
     // Collect labels' descriptions
