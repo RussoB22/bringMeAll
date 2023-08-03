@@ -102,9 +102,9 @@ function GlobalRiddleMenu({ onWebcamVisibilityChange, props }) {
       // Set the roomRiddle state here
 
       setRoomRiddle(globalRoom.currentRiddle);
-      // Fetch timeLeft from server
-      const timeLeft = globalRoom.timeLeft;
-      console.log(timeLeft);
+
+      // Fetch and set timeLeft from server
+      setTimeLeft(globalRoom.timeLeft);
 
     } catch (error) {
       console.error('Error:', error);
@@ -270,7 +270,9 @@ function GlobalRiddleMenu({ onWebcamVisibilityChange, props }) {
                 />
                 <div className="profile-stats media-btn-container">             
                   <button onClick={switchCamera} className="media-btn">Switch Camera</button>
+                  <span>{timeLeft}</span>
                   <button onClick={handleLeaveRoom} className="media-btn">Leave Room</button>
+                  
                   </div>               
                 {
                   image && (
