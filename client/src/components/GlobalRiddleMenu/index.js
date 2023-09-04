@@ -115,13 +115,13 @@ function GlobalRiddleMenu({ onWebcamVisibilityChange, props }) {
     fetchRiddle();
     const riddleTimerId = setInterval(() => {
       fetchRiddle();
-    }, 3000);
+    }, 5000);
 
     let countdownTimerId;
     if (timeLeft !== null) {
       countdownTimerId = setInterval(() => {
         setTimeLeft(prevTime => prevTime - 1);
-      }, 3000);
+      }, 5000);
     }
 
     return () => {
