@@ -2,7 +2,7 @@
 
 Bring Me! is a real-life treasure hunt game where players can solve riddles by looking for objects to earn points. This project aims to provide a fun and engaging gaming experience where players can participate individually or globally to find hidden treasures and win exciting rewards.
 
-## DEPLOYED SITE: https://pure-meadow-61870-2db53a3c769f.herokuapp.com/
+## DEPLOYED SITE: [https://bringmeall-820d703952e6.herokuapp.com/]
 
 ## Table of Contents
 
